@@ -371,8 +371,7 @@ async function compile() {
     elBtnAssemble.disabled = true;
     
     try {
-        const apiBase = (window.API_BASE_URL || '');
-        const response = await fetch(apiBase + '/api/assemble', {
+        const response = await fetch(`${window.CONFIG.API_BASE_URL}/api/assemble`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

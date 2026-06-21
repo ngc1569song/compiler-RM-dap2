@@ -27,11 +27,12 @@ def strip_ansi(text: str) -> str:
 app = FastAPI()
 
 # CORS: Read allowed origins from env var, default to all (*) for dev
-allowed = os.environ.get('ALLOWED_ORIGINS', '*')
-if allowed == '*':
-    origins = ["*"]
-else:
-    origins = [o.strip() for o in allowed.split(',') if o.strip()]
+allowed = os.environ.get(
+    "ALLOWED_ORIGINS",
+    "http://localhost:5500,http://127.0.0.1:5500"
+)
+
+origins = [o.strip() for o in allowed.split(",") if o.strip()]
 
 app.add_middleware(
     CORSMiddleware,
