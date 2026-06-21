@@ -1,0 +1,13 @@
+# Countdown example
+# Counts down from 5 to 1 and stores 0 in register 1.
+
+load 5
+store 1
+
+loop:
+    read 1
+    sub 1
+    store 1
+    jpos loop   # Jump to 'loop' if accumulator r0 > 0
+
+halt

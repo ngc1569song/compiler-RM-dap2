@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "register-machine"
+version = "0.1.0"
+description = "Custom register machine compiler and VM"
+readme = "README.md"
+requires-python = ">=3.10"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.scripts]
+register-machine = "register_machine.cli:main"
+register-visualizer = "backend.api:main"

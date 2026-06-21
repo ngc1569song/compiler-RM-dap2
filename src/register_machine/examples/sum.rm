@@ -1,0 +1,38 @@
+# Sum example
+# Computes sum of integers from 1 to 5 = 15.
+# Counter in r1 (starts at 5).
+# Sum in r2 (starts at 0).
+# Temporary counter in r3.
+
+load 5
+store 1
+load 0
+store 2
+
+outer_loop:
+    read 1
+    jzero done        # If counter r1 is 0, we are finished
+    
+    # We want to add r1 to r2.
+    # We copy r1 to r3.
+    store 3           # r3 = r1
+    
+add_loop:
+    read 3
+    jzero add_done    # If temporary counter r3 is 0, addition is complete
+    sub 1
+    store 3           # Decrement r3
+    
+    read 2
+    add 1             # Increment sum r2 by 1
+    store 2
+    jump add_loop
+
+add_done:
+    read 1
+    sub 1             # Decrement main counter r1
+    store 1
+    jump outer_loop
+
+done:
+    halt

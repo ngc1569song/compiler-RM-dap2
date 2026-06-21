@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Machine IDE & Visualizer</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Main CSS stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo-area">
+                <span class="icon">⚡</span>
+                <h1>Register Machine <span class="accent-text">IDE & Visualizer</span></h1>
+            </div>
+            <div class="header-controls">
+                <label for="example-select">Example Program:</label>
+                <div class="custom-select-wrapper">
+                    <select id="example-select">
+                        <option value="countdown">Countdown (Loop Branch)</option>
+                        <option value="multiply">Multiply (Repeated Add)</option>
+                        <option value="sum" selected>Sum 1 to 5 (Nested Loop)</option>
+                        <option value="error">Error Demo (Bounds/Jumps)</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            <!-- Left Panel: Editor & Controls -->
+            <section class="left-panel glass-panel">
+                <div class="panel-header">
+                    <h2>Assembly Editor</h2>
+                    <span class="file-name">program.rm</span>
+                </div>
+                
+                <div class="editor-container">
+                    <div class="line-numbers" id="line-numbers"></div>
+                    <textarea id="code-editor" spellcheck="false" placeholder="Write your Register Machine assembly here..."></textarea>
+                </div>
+
+                <div class="editor-controls">
+                    <button id="btn-assemble" class="btn btn-primary">Assemble Code</button>
+                    <button id="btn-step" class="btn btn-secondary" disabled>Step</button>
+                    <button id="btn-step-back" class="btn btn-info" disabled>Step Back</button>
+                    <button id="btn-run" class="btn btn-success" disabled>Run</button>
+                    <button id="btn-pause" class="btn btn-warning" disabled>Pause</button>
+                    <button id="btn-reset" class="btn btn-danger">Reset VM</button>
+                </div>
+            </section>
+
+            <!-- Right Panel: CPU & Register Memory Grid -->
+            <section class="right-panel">
+                <!-- CPU Metrics -->
+                <div class="cpu-metrics-container">
+                    <div class="metric-card glass-panel highlight-glow">
+                        <span class="label">Accumulator (r0)</span>
+                        <span class="value" id="val-r0">0</span>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <span class="label">Program Counter</span>
+                        <span class="value" id="val-pc">0</span>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <span class="label">Cycles Executed</span>
+                        <span class="value" id="val-cycles">0</span>
+                    </div>
+                    <div class="metric-card glass-panel">
+                        <span class="label">VM State</span>
+                        <span class="value badge state-reset" id="val-state">RESET</span>
+                    </div>
+                </div>
+
+                <!-- Registers Memory Bank Grid -->
+                <div class="memory-bank glass-panel">
+                    <div class="panel-header">
+                        <h2>Register File Memory Grid</h2>
+                        <div class="reg-config">
+                            <label for="reg-count-input">Registers:</label>
+                            <input type="number" id="reg-count-input" value="32" min="8" max="64">
+                        </div>
+                    </div>
+                    <div class="registers-grid" id="registers-grid">
+                        <!-- Filled dynamically by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Output Log / Compiler Diagnostics Terminal -->
+                <div class="terminal-panel glass-panel">
+                    <div class="panel-header">
+                        <h2>System Terminal Output</h2>
+                        <button class="btn-clear" id="btn-clear-term">Clear</button>
+                    </div>
+                    <div class="terminal-body" id="terminal-body">
+                        <div class="terminal-line system-msg">System initialized. Select an example or write assembly, then click 'Assemble Code'.</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Load environment config, then app -->
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

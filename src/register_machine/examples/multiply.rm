@@ -1,0 +1,21 @@
+# Multiply example
+# Computes n * 3. Here, n = 4, so result (12) is stored in register 2.
+
+load 4
+store 1       # r1 = counter = 4
+load 0
+store 2       # r2 = result = 0
+
+loop:
+    read 1
+    jzero done  # Exit if counter reaches 0
+    sub 1
+    store 1     # Decrement counter
+
+    read 2
+    add 3       # Add constant multiplier (3) to result
+    store 2
+    jump loop   # Repeat
+
+done:
+    halt

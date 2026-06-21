@@ -1,0 +1,7 @@
+{
+  "buildCommand": "# No build needed",
+  "outputDirectory": ".",
+  "env": {
+    "ALLOWED_ORIGINS": "@ALLOWED_ORIGINS"
+  }
+}
