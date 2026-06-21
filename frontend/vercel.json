@@ -1,5 +1,4 @@
-{
-  "buildCommand": "# No build needed - static HTML/CSS/JS",
-  "outputDirectory": ".",
+{  "buildCommand": "# No build needed - static HTML/CSS/JS",
+  "outputDirectory": "."
   
 }
