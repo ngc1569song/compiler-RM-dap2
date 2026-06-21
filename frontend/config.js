@@ -1,16 +1,14 @@
-// Frontend environment config for Vercel
-// Set environment variable VITE_API_URL on Vercel to your backend API URL
-// Example: https://compiler-backend.render.onrender.com
+// Frontend API Configuration
+// ===========================
+// In LOCAL development: points to localhost:8000 (your backend dev server).
+// In PRODUCTION (Vercel/Docker): uses same-origin empty string, because
+// the platform reverse-proxies /api/* requests to the real backend.
+// This means the frontend NEVER needs to know the backend's real URL.
 
-let apiUrl = 'http://localhost:8000';
-try {
-    const env = new Function('return import.meta.env')();
-    if (env && env.VITE_API_URL) {
-        apiUrl = env.VITE_API_URL;
-    }
-} catch (err) {
-    // import.meta.env is not available in plain <script> mode,
-    // so fall back to localhost for local static hosting.
+if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    window.API_BASE_URL = 'http://localhost:8000';
+} else {
+    // In production, /api/* is proxied by Vercel rewrites or nginx reverse proxy.
+    // Empty string = same origin = the browser calls its own domain.
+    window.API_BASE_URL = '';
 }
-
-window.API_BASE_URL = apiUrl;
