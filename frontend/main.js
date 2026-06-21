@@ -384,9 +384,11 @@ async function compile() {
         
         const data = await response.json();
         
+        // Extract error safely from FastAPI HTTPException structure
+        const errorMsg = data.errors || data.detail?.errors || "Compilation failed with unknown error.";
+
         if (!response.ok || !data.success) {
-            // Log formatted compiler errors from backend directly to terminal
-            logTerminal(data.errors || "Compilation failed with unknown error.", "error-msg");
+            logTerminal(errorMsg, "error-msg");
             logTerminal("Compilation failed! Backend returned diagnostic errors.", "error-msg");
             elBtnAssemble.disabled = false;
             return false;
